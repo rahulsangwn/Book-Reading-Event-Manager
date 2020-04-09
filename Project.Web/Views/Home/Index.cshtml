@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Project.BLL.UserModel.EventEntity>
+
+@{
+    ViewBag.Title = "Public Events";
+}
+
+<h2>Public Events</h2>
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Past Events</h2>
+                @foreach (var item in Model)
+                {
+                    if (item.StartTime < DateTime.Now)
+                    {
+                        <a class="card text-decoration-none" style="color: inherit" href="@Url.Action("Details", "Home", new { Id = item.EventId})">
+                            <div class="card-header text-center bg-primary text-white">
+                                @item.Title (@item.Duration Hours)
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 card-text">
+                                        @item.Description
+                                    </div>
+                                    <div class="col-6 card-text text-right">
+                                        Date : @item.StartTime.ToString().Remove(11)
+                                    </div>
+                                </div>
+                                
+                                <h6 class="card-text" style="padding-top: 5px;">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            Organized By: @item.Email
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <mark class="bg-info text-white">@item.Location</mark>
+                                        </div>
+                                    </div>
+                                </h6>
+                            </div>
+                        </a>
+                    }
+
+                }
+
+        </div>
+
+        <div class="col-lg-6">
+            <h2>Future Events</h2>
+            
+
+                @foreach (var item in Model)
+                {
+                    if (item.StartTime >= DateTime.Now)
+                    {
+                        <a class="card text-decoration-none" style="color: inherit" href="@Url.Action("Details", "Home", new { Id = item.EventId})">
+                            <div class="card-header text-center bg-primary text-white">
+                                @item.Title (@item.Duration Hours)
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 card-text">
+                                        @item.Description
+                                    </div>
+                                    <div class="col-6 card-text text-right">
+                                        Date : @item.StartTime.ToString().Remove(11)
+                                    </div>
+                                </div>
+
+                                <h6 class="card-text" style="padding-top: 5px;">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            Organized By: @item.Email
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <mark class="bg-info text-white">@item.Location</mark>
+                                        </div>
+                                    </div>
+                                </h6>
+                            </div>
+                        </a>
+                    }
+
+                }
+        </div>
+
+
+    </div>
+    
+</div>

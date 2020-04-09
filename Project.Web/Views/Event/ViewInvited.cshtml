@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Project.BLL.UserModel.InviteEntity>
+
+@{
+    ViewBag.Title = "Events Invited To";
+}
+
+<h2>Events Invited To</h2>
+<br />
+<div class="row">
+    <div class="col-md-6 list-group">
+        @Html.ActionLink("Past Invitation", "ViewInvited", "Event", new { }, new { @class = "list-group-item list-group-item-action active disabled text-center" })
+        @foreach (var item in Model)
+        {
+            if (item.EventDate < System.DateTime.Now)
+            {
+                @Html.ActionLink(item.Title, "Details", "Home", new { Id = item.EventId }, new { @class = "list-group-item list-group-item-action" })
+            }
+        }
+    </div>
+
+    <div class="col-md-6 list-group">
+        @Html.ActionLink("Future Invitation", "ViewInvited", "Event", new { }, new { @class = "list-group-item list-group-item-action active disabled text-center" })
+        @foreach (var item in Model)
+        {
+            if (item.EventDate > System.DateTime.Now)
+            {
+                @Html.ActionLink(item.Title, "Details", "Home", new { Id = item.EventId }, new { @class = "list-group-item list-group-item-action" })
+            }
+        }
+    </div>
+
+</div>
+

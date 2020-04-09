@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Project.BLL.UserModel.EventEntity>
+
+@{
+    ViewBag.Title = "My Events";
+}
+
+<h2>My Events</h2>
+<br />
+<div class="row">
+    <div class="col-12">
+        <div class="">
+            <table class="table table-hover">
+                <tr class="table-primary">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartTime)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Action")
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.Type == "Public" && item.StartTime >= System.DateTime.Now)
+                    {
+                        <tr class="table-success">
+                            <td>
+                                @Html.ActionLink(item.Title, "Details", "Home", new { Id = item.EventId }, new { })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { Id = item.EventId })
+                            </td>
+                        </tr>
+                    }
+                    else if(item.Type == "Private" && item.StartTime >= System.DateTime.Now)
+                    {
+                        <tr class="bg-primary text-white">
+                            <td>
+                                @Html.ActionLink(item.Title, "Details", "Home", new { Id = item.EventId }, new { })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { Id = item.EventId })
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+
+                @foreach (var item in Model)
+                {
+                    if (item.Type == "Public" && item.StartTime < System.DateTime.Now)
+                    {
+                        <tr class="table-success">
+                            <td>
+                                @Html.ActionLink(item.Title, "Details", "Home", new { Id = item.EventId }, new { })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { Id = item.EventId })
+                            </td>
+                        </tr>
+                    }
+                    else if(item.Type == "Private" && item.StartTime < System.DateTime.Now)
+                    {
+                        <tr class="bg-primary text-white">
+                            <td>
+                                @Html.ActionLink(item.Title, "Details", "Home", new { Id = item.EventId }, new { })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { Id = item.EventId })
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+            </table>
+        </div>
+
+        
+
+
+    </div>
+
+</div>
+

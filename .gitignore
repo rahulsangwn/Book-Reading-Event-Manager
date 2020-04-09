@@ -1,0 +1,11 @@
+.vs/
+AssignmentMVC.sln
+packages/
+*.csproj*
+bin
+obj
+Properties
+App_Data
+Migrations
+Scripts
+v3.x
