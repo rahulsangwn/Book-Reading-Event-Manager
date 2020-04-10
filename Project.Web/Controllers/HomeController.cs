@@ -41,7 +41,7 @@ namespace Project.Web.Controllers
         
         public ActionResult Error(string error)
         {
-            return View(error);
+            return View("Error", error);
         }
 
         public ActionResult Helpdesk()
