@@ -23,6 +23,8 @@ namespace Project.BLL.UserModel
         public DateTime StartTime { get; set; }
         [Required]
         public string Location { get; set; }
+
+        [RegularExpression(@"^((Public)|(Private))$", ErrorMessage = "Type can be either Private or Public")]
         public string Type { get; set; }
         public int Duration { get; set; }
         [MaxLength(50, ErrorMessage = "Length must be less than 50")]

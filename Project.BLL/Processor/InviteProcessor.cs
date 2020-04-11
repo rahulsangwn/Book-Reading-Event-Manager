@@ -11,6 +11,11 @@ namespace Project.BLL.Processor
     {
         RecordContext _context = new RecordContext();
 
+        /// <summary>
+        /// Automapping Invite to InviteEntity
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public InviteEntity InviteToInviteEntity(Invite source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -22,6 +27,11 @@ namespace Project.BLL.Processor
             return mapper.Map<Invite, InviteEntity>(source);
         }
 
+        /// <summary>
+        /// Get List of events in which particual user is invited
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public List<InviteEntity> GetAllInvitedUsers(string email)
         {
             List<InviteEntity> inviteEntityList = new List<InviteEntity>();
@@ -37,6 +47,12 @@ namespace Project.BLL.Processor
             return inviteEntityList;
         }
 
+        /// <summary>
+        /// Inviting users in an event
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
         public bool CreateInvitation(string email, int eventId)
         {
             string[] emails = email.Split(',');
@@ -62,11 +78,22 @@ namespace Project.BLL.Processor
             return true;
         }
 
+        /// <summary>
+        /// To check if particular user is invited into particular event
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
         public bool IsInvitedUser(string email, int eventId)
         {
             return _context.Invites.Any(e => (e.Email == email) && (e.EventId == eventId));
         }
 
+        /// <summary>
+        /// To get invited user count in a particular event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
         public int InvitedUsersCount(int eventId)
         {
             return _context.Invites.Count(e => e.EventId == eventId);

@@ -12,6 +12,11 @@ namespace Project.BLL.Processor
     {
         readonly RecordContext _context = new RecordContext();
 
+        /// <summary>
+        /// Mapping of Comment to CommentEntity object using Automapper
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public CommentEntity CommentToCommentEntity(Comment source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -23,6 +28,11 @@ namespace Project.BLL.Processor
             return mapper.Map<Comment, CommentEntity>(source);
         }
 
+        /// <summary>
+        /// Mapping CommentEntity object to Comment type Object
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public Comment CommentEntityToComment(CommentEntity source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -34,6 +44,11 @@ namespace Project.BLL.Processor
             return mapper.Map<CommentEntity, Comment>(source);
         }
 
+        /// <summary>
+        /// Getting all comments from database based on eventId in ascending order of CommentDate
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
         public List<CommentEntity> GetAllComment(int eventId)
         {
             List<CommentEntity> final = new List<CommentEntity>();
@@ -45,6 +60,10 @@ namespace Project.BLL.Processor
             return final.OrderBy(c => c.CommentDate).ToList();
         }
 
+        /// <summary>
+        /// To insert a comment in database
+        /// </summary>
+        /// <param name="comment"></param>
         public void CreateComment(CommentEntity comment)
         {
             _context.Comments.Add(CommentEntityToComment(comment));

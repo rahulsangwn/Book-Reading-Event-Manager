@@ -8,6 +8,9 @@ using System.Web.Mvc;
 
 namespace Project.Web.Controllers
 {
+    /// <summary>
+    /// For handling all authorized event actions
+    /// </summary>
     [Authorize]
     public class EventController : Controller
     {

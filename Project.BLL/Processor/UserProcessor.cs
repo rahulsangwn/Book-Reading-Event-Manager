@@ -10,6 +10,11 @@ namespace Project.BLL.Processor
     {
         RecordContext _rc = new RecordContext();
 
+        /// <summary>
+        /// Automapping User to UserEntity
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public UserEntity UserToUserEntity(User source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -20,6 +25,11 @@ namespace Project.BLL.Processor
             return mapper.Map<User, UserEntity>(source);
         }
 
+        /// <summary>
+        /// Automapping UserEntity to User
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public User UserEntityToUser(UserEntity source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -30,6 +40,11 @@ namespace Project.BLL.Processor
             return mapper.Map<UserEntity, User>(source);
         }
 
+        /// <summary>
+        /// For registering a user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool CreateUser(UserEntity user)
         {
             var t = UserEntityToUser(user);
@@ -42,6 +57,11 @@ namespace Project.BLL.Processor
             return true;
         }
 
+        /// <summary>
+        /// For login validation
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool IsValidUser(UserEntity user)
         {
             return _rc.Users.Any(x => x.Email == user.Email && x.Password == user.Password);

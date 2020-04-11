@@ -14,7 +14,7 @@ namespace Project.DAL.Data
         public string   Email            { get; set; }
         public virtual  User User        { get; set; }
 
-        public int?      EventId          { get; set; }
+        public int?     EventId          { get; set; }
         public virtual  Event Event      { get; set; }
     }
 }

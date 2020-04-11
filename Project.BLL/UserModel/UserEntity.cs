@@ -13,15 +13,15 @@ namespace Project.BLL.UserModel
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password Required")]
-        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
+        [StringLength(20, ErrorMessage = "Must be between 5 and 20 characters", MinimumLength = 5)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [DisplayName("Confirm Password")]
         [Required(ErrorMessage = "Confirm Password is required")]
-        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         [Compare("Password")]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[^\da-zA-Z]).{5,20}$", ErrorMessage = "Must Contain one special character")]
         public string ConfirmPassword { get; set; }
 
         public bool PersistentLogin { get; set; }

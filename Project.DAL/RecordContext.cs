@@ -6,6 +6,9 @@ namespace Project.DAL
 {
     public class RecordContext : DbContext, IRecordContext
     {
+        /// <summary>
+        /// For Connecting to Database using connection string named as "MyConnection" in app.config
+        /// </summary>
         public RecordContext() : base("MyConnection")
         {
             DbInterception.Add(new InterceptorLogging());

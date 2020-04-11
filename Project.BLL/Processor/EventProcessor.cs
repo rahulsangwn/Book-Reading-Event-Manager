@@ -12,12 +12,14 @@ namespace Project.BLL.Processor
     public class EventProcessor
     {
         RecordContext _context = new RecordContext();
-        //IMapper _mapper = new Mapper();
         
-        //------------------------------------------------------------------------------------------
         //------------------------Methods for Mapping-----------------------------------------------
-        //------------------------------------------------------------------------------------------
-
+        
+        /// <summary>
+        /// Automapping of Event to EventEntity
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public EventEntity EventToEventEntity(Event source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -30,6 +32,12 @@ namespace Project.BLL.Processor
             var mapper = new Mapper(config);
             return mapper.Map<Event, EventEntity>(source);
         }
+
+        /// <summary>
+        /// Automapping of EventEntity to Event
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public Event EventEntityToEvent(EventEntity source)
         {
             var config = new MapperConfiguration(cfg =>
@@ -42,16 +50,24 @@ namespace Project.BLL.Processor
             return mapper.Map<EventEntity, Event>(source);
         }
 
-        //---------------------------------------------------------------------------------------------
         //----------------------For CURD operations on events------------------------------------------
-        //---------------------------------------------------------------------------------------------
 
+        /// <summary>
+        /// Get EventEntity type object based on event Id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public EventEntity GetEvent(int Id)
         {
             var evnt = _context.Events.FirstOrDefault(s => s.EventId == Id);
             return EventToEventEntity(evnt);
         }
 
+        /// <summary>
+        /// Inserting a event in database
+        /// </summary>
+        /// <param name="evnt"></param>
+        /// <returns></returns>
         public int CreateEvent(EventEntity evnt)
         {
             Event myEvent = EventEntityToEvent(evnt);
@@ -61,6 +77,10 @@ namespace Project.BLL.Processor
             return myEvent.EventId; // Return Id of newly generated event
         }
 
+        /// <summary>
+        /// Updating an event
+        /// </summary>
+        /// <param name="evnt"></param>
         public void UpdateEvent(EventEntity evnt)
         {
             var obj = _context.Events.First(e => e.EventId == evnt.EventId);
@@ -78,6 +98,12 @@ namespace Project.BLL.Processor
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// To get list of all Events in EventEntity type
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
         public IList<EventEntity> GetAll(string email, bool admin)
         {
             var _econtext = _context.Events;
@@ -92,6 +118,10 @@ namespace Project.BLL.Processor
             return sortedResult;
         }
 
+        /// <summary>
+        /// To get list of all public events
+        /// </summary>
+        /// <returns></returns>
         public IList<EventEntity> GetPublicAll()
         {
             var temp = _context.Events.Where(s => s.Type == "Public").ToList();

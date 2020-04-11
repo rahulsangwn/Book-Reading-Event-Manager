@@ -12,7 +12,11 @@ namespace Project.Web.Controllers
         {
             _process = new UserProcessor();
         }
-        // GET: Account
+        
+        /// <summary>
+        /// For Login View
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Login()
         {
             return View();
@@ -32,12 +36,20 @@ namespace Project.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// For Logout Action
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
 
+        /// <summary>
+        /// For SignUp 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SignUp()
         {
             return View();
