@@ -18,6 +18,10 @@ namespace Project.Web.Controllers
             _iprocessor = new InviteProcessor();
         }
 
+        /// <summary>
+        /// To Reder all public events
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(_eprocessor.GetPublicAll());
